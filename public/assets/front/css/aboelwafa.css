@@ -1,0 +1,181 @@
+.azan {
+    direction: ltr;
+}
+.azan h2 {
+        color: #f3e5b8;
+    font-size: 16px;
+    text-align: center;
+}
+
+
+#chooseProvider{
+    margin: auto;
+    display: block;
+    width: 50%;
+    text-align: center;
+    background: #111;
+    color: #f3e5b8;
+    padding: 5px 15px;
+}
+
+#chooseRBT {
+    background: #111;
+    color: #f3e5b8;
+    margin: auto;
+    display: block;
+    width: 50%;
+    text-align: center;
+    height: 33px;
+    line-height: 30px;
+    border-radius: 10px;
+    border: 1px solid;
+}
+
+#chooseAudio table {
+    background-color: rgba(0,0,0,0.6);
+    width: 85%;
+    margin: auto;
+}
+
+#chooseAudio table th {
+    text-align: center;
+}
+
+#chooseAudio table tr {
+    text-align: right;
+    padding-right: 15px;
+    padding: 15px 4px;
+    font-size: 12px;
+    height: auto;
+    vertical-align: middle;
+    color: #f3e5b8;
+}
+
+#chooseAudio table td {
+    text-align: center;
+    padding-right: 15px;
+    font-size: 11px;
+    padding: 15px 4px;
+    font-size: 12px;
+    height: auto;
+    vertical-align: middle;
+    color: #f3e5b8;
+}
+
+#chooseAudio .np-play, #chooseAudio #play {
+    background: url(../img/play_small.svg) no-repeat center;
+    background-size: 14px;
+}
+
+#chooseAudio #paused, #chooseAudio #playing {
+        background: url(../img/pause_small.png) no-repeat center;
+    background-size: 14px;
+}
+        /* Audio Player Styles ---------------------------------------------*/
+        .audio-player {
+            height: 80px;
+            width: 100%;
+            background: #fff;
+            position: relative;
+            border-top: 1px solid whitesmoke;
+            box-shadow:  0px 1px 1px rgb(220,220,220);
+            margin-bottom: 30px;
+            color: #969696; }
+
+        .audio-play-list {
+            background: #fff;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #709E18; }
+
+
+        .play-status {
+            width: 50px; }
+
+        .now-playing {
+            background: #ccc; }
+
+        .audio-play-list li:last-child {
+            border-bottom: none; }
+
+        .audio-play-list li.active {
+            color: #709E18;
+            background: #fafafa; }
+
+        .album-cover {
+            height: 100%;
+            width: 80px; }
+
+        .audio-controls-wrapper {
+            position: relative;
+            border-top: 1px solid whitesmoke; }
+
+        .seek-bar, .seek-bar-thumb {
+            position: absolute;
+            bottom: 0px;
+            left: 0;
+            height: 4px;
+            width: 100%;
+            background: #ebebeb; }
+
+        .seek-bar-thumb {
+            width: 0%;
+            background: #709E18; }
+
+        .track-title {
+            position: absolute;
+            width: 68%;
+            right: 10px;
+            top: 10px;
+            text-align: right;
+            padding-bottom: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            border-bottom: 1px solid whitesmoke;
+            color: #709E18; }
+
+
+        .time-holder {
+            width: 26%;
+            font-size: 14px;
+            min-width: 80px;
+            max-width: 100px;
+            position: absolute;
+            right: 10px;
+            bottom: 15px;
+            text-align: right; }
+
+        .time-holder div {
+            float: right;
+        }
+
+        .audio-controls {
+            position: absolute;
+            width: 35%;
+            min-width: 100px;
+            max-width: 150px;
+            bottom: 15px;
+            left: 100px;
+            cursor: pointer; }
+
+        span.fa-play {
+            color: #709E18;
+        }
+
+        .album-cover{
+            background: url('img/cover.jpg') no-repeat;
+            background-size:80px;
+        }
+
+        #chooseAudio{
+            margin-bottom: 30px;
+        }
+        .center{
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .center img{
+            display: block;
+            margin: 10px auto;
+            height: 55px;
+        }

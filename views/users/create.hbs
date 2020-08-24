@@ -1,0 +1,73 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-title">
+                <h3><i class="fa fa-bars"></i>Add User</h3>
+                <div class="box-tool">
+                    <a data-action="collapse" href="#"><i class="fa fa-chevron-up"></i></a>
+                    <a data-action="close" href="#"><i class="fa fa-times"></i></a>
+                </div>
+            </div>
+            <div class="box-content">
+                <form class="form-horizontal" action="/users" method="post">
+                    
+                    <div class="form-group">
+                        <label class="col-sm-3 col-lg-2 control-label">User Name *</label>
+                        <div class="col-sm-9 col-lg-10 controls">
+                            <input type="text" name="userName" placeholder="User Name"
+                                class="form-control input-lg" required>
+                            <span class="help-inline">User Name</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 col-lg-2 control-label">Email *</label>
+                        <div class="col-sm-9 col-lg-10 controls">
+                            <input type="email" name="email" placeholder="Email"
+                                class="form-control input-lg" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 col-lg-2 control-label">Password *</label>
+                        <div class="col-sm-9 col-lg-10 controls">
+                            <input type="password" name="password" placeholder="Password"
+                                class="form-control input-lg" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 col-lg-2 control-label">phone (optional)</label>
+                        <div class="col-sm-9 col-lg-10 controls">
+                            <input type="number" name="phoneNumber" placeholder="phone"
+                                class="form-control input-lg">
+                        </div>
+                    </div>
+                    {{!-- <div class="form-group">
+                        <label class="col-sm-3 col-lg-2 control-label">@lang('messages.users.role') *</label>
+                        <div class="col-sm-9 col-lg-10 controls">
+                            <select class="form-control chosen-rtl" data-placeholder="Choose a Role" name="role"
+                                tabindex="1" required>
+                                @foreach($roles as $role)
+                                <option value="{{$role->name}}">{{$role->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div> --}}
+
+                    <div class="form-group">
+                        <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
+                            <input type="submit" class="btn btn-primary" value="Save">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    $('#user').addClass('active');
+    $('#user-create').addClass('active');
+</script>

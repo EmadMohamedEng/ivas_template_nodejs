@@ -159,7 +159,7 @@
       <li class="user-profile">
         <a data-toggle="dropdown" href="#" class="user-menu dropdown-toggle">
           <span class="hhh" id="user_info">
-            Omar Local
+            {{userLogin.userName}}
           </span>
           <i class="fa fa-caret-down"></i>
         </a>
@@ -167,7 +167,7 @@
         <!-- BEGIN User Dropdown -->
         <ul class="dropdown-menu dropdown-navbar" id="user_menu">
           <li>
-            <a href="/user_profile">
+            <a href="/profile">
               <i class="fa fa-user"></i>
               profile
             </a>
@@ -178,13 +178,10 @@
           <li class="divider"></li>
 
           <li>
-            <a href="/logout" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
+            <a href="/login/logout">
               <i class="fa fa-off"></i>
               logout
             </a>
-            <form id="frm-logout" action="/logout" method="POST" style="display: none;">
-              {{!-- {{ csrf_field() }} --}}
-            </form>
           </li>
         </ul>
         <!-- BEGIN User Dropdown -->
@@ -211,7 +208,7 @@
           <!-- BEGIN Submenu -->
           <ul class="submenu">
             <li id="user-create"><a href="/users/new">Add User</a></li>
-            <li id="user-index"><a href="/users">Users</a></li>
+            <li id="user-index"><a href="/users/list">Users</a></li>
           </ul>
           <!-- END Submenu -->
         </li>
@@ -519,10 +516,10 @@
         </ul>
       </div>
       <!-- END Breadcrumb -->
-
+      {{!-- {{ userLogin }} --}}
       {{{body}}}
 
-      
+
     </div>
     <div class="footer" align="center" style=" position: absolute; width: 100%; bottom: 0;">
       <p>Carbon::createFromFormat('Y-m-d H:i:s', $date) © iVAS Template</p>

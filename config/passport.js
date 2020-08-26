@@ -1,21 +1,19 @@
 const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
-
-
+const User = require('../modules/User');
 
 passport.serializeUser((user, done) => {
     return done(null, user.id);
 })
 
 passport.deserializeUser((id, done) => {
-    User.findById(id, ('email userName phoneNumber address image'), (error, user) => {
-        Cart.findById(id, (error, cart) => {
-            if (!cart) {
-                return done(error, user)
-            }
-            user.cart = cart
+    User.findById(id,  (error, user) => {
+
+        if (user) {
             return done(error, user)
-        })
+        }
+        return done(error, user)
+
     })
 })
 

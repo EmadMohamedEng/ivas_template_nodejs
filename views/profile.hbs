@@ -1,0 +1,157 @@
+{{#if successMas}}
+<div class="alert alert-success">
+    {{ successMas }}
+</div>
+{{/if}}
+{{#if errorMas}}
+<div class="alert alert-danger">
+    {{ errorMas }}
+</div>
+{{/if}}
+<div class="box">
+    <div class="box-title">
+        <h3><i class="fa fa-file"></i>Profile Info</h3>
+        <div class="box-tool">
+            <a data-action="collapse" href="#"><i class="fa fa-chevron-up"></i></a>
+            <a data-action="close" href="#"><i class="fa fa-times"></i></a>
+        </div>
+    </div>
+    <div class="box-content">
+        <div class="row">
+            <div class="col-md-3">
+                <img class="img-responsive img-thumbnail" src="{{userLogin.image}}" alt="profile picture" />
+                <br /><br />
+            </div>
+            <div class="col-md-9 user-profile-info">
+                <p><span>User Name:</span> {{userLogin.userName}}</p>
+                <p><span>Email:</span> <a href="#">{{userLogin.email}}</a></p>
+                <p><span>Phone:</span> {{userLogin.phoneNumber}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-blue">
+            <div class="box-title">
+                <h3><i class="fa fa-file"></i>Edit Profile Info</h3>
+                <div class="box-tool">
+                    <a data-action="collapse" href="#"><i class="fa fa-chevron-up"></i></a>
+                    <a data-action="close" href="#"><i class="fa fa-times"></i></a>
+                </div>
+            </div>
+            <div class="box-content">
+                <form action="/profile" class="form-horizontal" method="post">
+                    <input type="hidden" name="_csrf" value="{{token}}">
+
+                    <div class="form-group">
+                        <label class="col-sm-3 col-lg-2 control-label">User Name *</label>
+                        <div class="col-sm-9 col-lg-10 controls">
+                            <input type="text" value="{{userLogin.userName}}" class="form-control" name="userName"
+                                required />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 col-lg-2 control-label">Email *</label>
+                        <div class="col-sm-9 col-lg-10 controls">
+                            <input type="text" value="{{userLogin.email}}" class="form-control" name="email" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 col-lg-2 control-label">Phone *</label>
+                        <div class="col-sm-9 col-lg-10 controls">
+                            <input type="text" name="phoneNumber" placeholder="Phone" value="0{{userLogin.phoneNumber}}"
+                                class="form-control input-lg" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
+                            <button type="submit" class="btn btn-primary">save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="box box-blue">
+            <div class="box-title">
+                <h3><i class="fa fa-file"></i>Edit Profile Picture</h3>
+                <div class="box-tool">
+                    <a data-action="collapse" href="#"><i class="fa fa-chevron-up"></i></a>
+                    <a data-action="close" href="#"><i class="fa fa-times"></i></a>
+                </div>
+            </div>
+
+            <div class="box-content">
+                <img src="{{userLogin.image}}" id="image" style="width: 35%;height: 200px;" class="img-thumbnail">
+                <form action="/uploadfile" method="post" enctype="multipart/form-data">
+                    <input type="file" id="file" name="myfile" accept="image/*">
+                    <div style="display: none;" id="actionbutton">
+                        <input type="hidden" name="_csrf" value="{{token}}">
+                        <input type="submit" value="Save" class="btn btn-success">
+                        <a href="/profile" class="btn btn-danger">Cancel</a>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="box box-blue">
+            <div class="box-title">
+                <h3><i class="fa fa-file"></i>EDIT Users Password</h3>
+                <div class="box-tool">
+                    <a data-action="collapse" href="#"><i class="fa fa-chevron-up"></i></a>
+                    <a data-action="close" href="#"><i class="fa fa-times"></i></a>
+                </div>
+            </div>
+            <div class="box-content">
+                <form id="form-change-password" role="form" method="POST" action="/password"
+                    class="form-horizontal">
+                    <div class="col-md-9">
+                        <label for="current-password" class="col-sm-4 control-label">old password</label>
+                        <div class="col-sm-8">
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="current-password"
+                                    name="current_password" placeholder="Password" required>
+                            </div>
+                        </div>
+                        <label for="password" class="col-sm-4 control-label">new password</label>
+                        <div class="col-sm-8">
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="password" name="password"
+                                    placeholder="Password" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-5 col-sm-6">
+                            <button type="submit" class="btn btn-danger"> save </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.getElementById('file').onchange = function () {
+        const reader = new FileReader();
+        reader.onload = function () {
+            document.getElementById('image').src = this.result;
+        }
+        reader.readAsDataURL(this.files[0]);
+        $('#file').css('display: none;');
+        $('#actionbutton').removeAttr('style')
+    }
+
+
+    document.getElementById('updatedata').onclick = function () {
+        $('#rowhome').addClass('d-none');
+        $('#formupdate').removeAttr('style')
+    }
+</script>

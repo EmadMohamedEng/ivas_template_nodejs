@@ -1,3 +1,8 @@
+{{#if errorMas}}
+<div class="alert alert-danger">
+    {{ errorMas }}
+</div>
+{{/if}}
 <div class="row">
     <div class="col-md-12">
         <div class="box">
@@ -10,12 +15,10 @@
             </div>
             <div class="box-content">
                 <form class="form-horizontal" action="/users" method="post">
-                    <input type="hidden" name="_csrf" value="{{token}}">
                     <div class="form-group">
                         <label class="col-sm-3 col-lg-2 control-label">User Name *</label>
                         <div class="col-sm-9 col-lg-10 controls">
-                            <input type="text" name="userName" placeholder="User Name"
-                                class="form-control input-lg"  required>
+                            <input type="text" name="userName" placeholder="User Name" value="{{old.userName}}" class="form-control input-lg">
                             <span class="help-inline">User Name</span>
                         </div>
                     </div>
@@ -23,37 +26,35 @@
                     <div class="form-group">
                         <label class="col-sm-3 col-lg-2 control-label">Email *</label>
                         <div class="col-sm-9 col-lg-10 controls">
-                            <input type="email" name="email" placeholder="Email"
-                                class="form-control input-lg" required>
+                            <input type="email" name="email" placeholder="Email" class="form-control input-lg">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-sm-3 col-lg-2 control-label">Password *</label>
                         <div class="col-sm-9 col-lg-10 controls">
-                            <input type="password" name="password" placeholder="Password"
-                                class="form-control input-lg" required>
+                            <input type="password" name="password" placeholder="Password" class="form-control input-lg">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 col-lg-2 control-label">phone (optional)</label>
                         <div class="col-sm-9 col-lg-10 controls">
-                            <input type="number" name="phoneNumber" placeholder="phone"
-                                class="form-control input-lg">
+                            <input type="text" name="phoneNumber" placeholder="phone" class="form-control input-lg">
                         </div>
                     </div>
-                    {{!-- <div class="form-group">
-                        <label class="col-sm-3 col-lg-2 control-label">@lang('messages.users.role') *</label>
+                    <div class="form-group">
+                        <label class="col-sm-3 col-lg-2 control-label">User Role *</label>
                         <div class="col-sm-9 col-lg-10 controls">
                             <select class="form-control chosen-rtl" data-placeholder="Choose a Role" name="role"
                                 tabindex="1" required>
-                                @foreach($roles as $role)
-                                <option value="{{$role->name}}">{{$role->name}}</option>
-                                @endforeach
+                                {{#each roles }}
+                                    <option value="{{this.role}}">{{this.role}}</option>
+                                {{/each}}
                             </select>
                         </div>
-                    </div> --}}
+                    </div>
 
+                    <input type="hidden" name="_csrf" value="{{token}}">
                     <div class="form-group">
                         <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
                             <input type="submit" class="btn btn-primary" value="Save">

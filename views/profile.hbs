@@ -25,7 +25,7 @@
             <div class="col-md-9 user-profile-info">
                 <p><span>User Name:</span> {{userLogin.userName}}</p>
                 <p><span>Email:</span> <a href="#">{{userLogin.email}}</a></p>
-                <p><span>Phone:</span> {{userLogin.phoneNumber}}</p>
+                <p><span>Phone:</span> 0{{userLogin.phoneNumber}}</p>
             </div>
         </div>
     </div>
@@ -42,27 +42,26 @@
             </div>
             <div class="box-content">
                 <form action="/profile" class="form-horizontal" method="post">
-                    <input type="hidden" name="_csrf" value="{{token}}">
+                    {{!-- <input type="hidden" name="_csrf" value="{{token}}"> --}}
 
                     <div class="form-group">
                         <label class="col-sm-3 col-lg-2 control-label">User Name *</label>
                         <div class="col-sm-9 col-lg-10 controls">
-                            <input type="text" value="{{userLogin.userName}}" class="form-control" name="userName"
-                                required />
+                            <input type="text" value="{{userLogin.userName}}" class="form-control" name="userName" />
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-sm-3 col-lg-2 control-label">Email *</label>
                         <div class="col-sm-9 col-lg-10 controls">
-                            <input type="text" value="{{userLogin.email}}" class="form-control" name="email" required />
+                            <input type="text" value="{{userLogin.email}}" class="form-control" name="email" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 col-lg-2 control-label">Phone *</label>
                         <div class="col-sm-9 col-lg-10 controls">
                             <input type="text" name="phoneNumber" placeholder="Phone" value="0{{userLogin.phoneNumber}}"
-                                class="form-control input-lg" required>
+                                class="form-control input-lg">
                         </div>
                     </div>
                     <div class="form-group">
@@ -110,21 +109,27 @@
                 </div>
             </div>
             <div class="box-content">
-                <form id="form-change-password" role="form" method="POST" action="/password"
-                    class="form-horizontal">
+                <form id="form-change-password" role="form" method="POST" action="/password" class="form-horizontal">
                     <div class="col-md-9">
-                        <label for="current-password" class="col-sm-4 control-label">old password</label>
+                        <label for="current-password" class="col-sm-4 control-label">Old password</label>
                         <div class="col-sm-8">
                             <div class="form-group">
                                 <input type="password" class="form-control" id="current-password"
-                                    name="current_password" placeholder="Password" required>
+                                    name="current_password" placeholder="Old password">
                             </div>
                         </div>
-                        <label for="password" class="col-sm-4 control-label">new password</label>
+                        <label for="password" class="col-sm-4 control-label">New password</label>
                         <div class="col-sm-8">
                             <div class="form-group">
                                 <input type="password" class="form-control" id="password" name="password"
-                                    placeholder="Password" required>
+                                    placeholder="New password">
+                            </div>
+                        </div>
+                        <label for="password" class="col-sm-4 control-label">Confirm Password</label>
+                        <div class="col-sm-8">
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="password" name="confirmPassword"
+                                    placeholder="Confirm Password">
                             </div>
                         </div>
                     </div>

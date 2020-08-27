@@ -1,10 +1,7 @@
 const User = require('../modules/User');
+const Role = require('../modules/Role');
 const passport = require('passport');
-const { registerValidation } = require("../validation/validation")
-
-
-
-
+const { addUsersValidation } = require("../validation/validation")
 
 index = function (req, res, next) {
     const successMas = req.flash('success')[0];
@@ -14,87 +11,125 @@ index = function (req, res, next) {
         if (error) {
             console.log(error)
         }
-        res.render('users/index', { title: 'Ivas Temp', items: users, successMas: successMas, errorMas: errorMas, userLogin: userLogin })
+        // console.log(users)
+        // return;
+        res.render('users/index', { title: process.env.TITLE_DASHBOARD, items: users, successMas: successMas, errorMas: errorMas, userLogin: userLogin })
     })
 
 
 }
 
 addUser = function (req, res, next) {
-    const userLogin = req.user
-
-    res.render('users/create', { title: 'Ivas Temp', token: req.csrfToken(), userLogin: userLogin })
+    const userLogin = req.user;
+    const errorMas = req.flash('error');
+    Role.find({}, (error, roles) => {
+        if (error) {
+            console.log(error)
+        }
+        res.render('users/create', { title: process.env.TITLE_DASHBOARD, token: req.csrfToken(), userLogin: userLogin, errorMas: errorMas, roles: roles })
+    })
 }
 
 addUserPost = function (req, res, next) {
 
-    const user = new User({
-        email: req.body.email,
-        userName: req.body.userName,
-        phoneNumber: req.body.phoneNumber,
-        password: new User().hashpassword(req.body.password)
-    });
+    const { error } = addUsersValidation(req.body);
+    console.log("omar1 " + error)
+    if (error) {
+        console.log("omar2 " + error)
+        req.flash('error', error.details[0].message)
+        res.redirect('/users/new')
+    } else {
+        const user = new User({
+            email: req.body.email,
+            userName: req.body.userName,
+            phoneNumber: req.body.phoneNumber,
+            role: req.body.role,
+            password: new User().hashpassword(req.body.password)
+        });
 
-    User.findOne({ email: req.body.email }, (err, result) => {
-        if (err) {
-            res.status(404).json({
-                Massage: err
-            })
-        }
-        if (result) {
-            req.flash('error', 'this email already exist')
-            res.redirect('/users/list');
-            return;
-        }
-
-        user.save((err, user) => {
+        User.findOne({ email: req.body.email }, (err, result) => {
             if (err) {
-                console.log(err)
+                res.status(404).json({
+                    Massage: err
+                })
             }
-            else {
-                console.log(user)
-                req.flash('success', 'User Add successfully')
+            if (result) {
+                req.flash('error', 'this email already exist')
                 res.redirect('/users/list');
+                return;
             }
+
+            user.save((err, user) => {
+                if (err) {
+                    console.log(err)
+                }
+                else {
+                    console.log(user)
+                    req.flash('success', 'User Add successfully')
+                    res.redirect('/users/list');
+                }
+            })
         })
-    })
 
-
-
-
+    }
 }
 
 editUser = function (req, res, next) {
+    const errorMas = req.flash('error');
 
     User.findOne({ _id: req.params.id }, (err, user) => {
         if (err) {
             console.log(err)
         } else {
-            const userLogin = req.user
-
-            res.render('users/edit', { title: 'Ivas Temp', token: req.csrfToken(), user: user, userLogin: userLogin })
+            Role.find({}, (error, roles) => { 
+                if (error) {
+                    console.log(error)
+                } 
+                const userLogin = req.user
+                res.render('users/edit', { title: process.env.TITLE_DASHBOARD, token: req.csrfToken(), user: user, userLogin: userLogin, errorMas: errorMas ,roles:roles})
+            })
         }
     })
+
 }
 
 editUserPost = function (req, res, next) {
     const ID = req.body.userId;
-    const updatedUser = {
-        userName: req.body.userName,
-        email: req.body.email,
-        phoneNumber: req.body.phoneNumber,
-        password: new User().hashpassword(req.body.password)
-    };
-    User.updateOne({ _id: ID }, { $set: updatedUser }, (err, users) => {
-        if (err) {
+    const { error } = addUsersValidation(req.body);
+    console.log("omar1 " + error)
+    if (error) {
+        console.log("omar2 " + error)
+        req.flash('error', error.details[0].message)
+        res.redirect('/users/' + ID + '/edit')
+    } else {
+        const updatedUser = {
+            userName: req.body.userName,
+            email: req.body.email,
+            phoneNumber: req.body.phoneNumber,
+            role: req.body.role,
+            password: new User().hashpassword(req.body.password)
+        };
+        User.findOne({ email: req.body.email, _id: { $ne: ID } }, (err, result) => {
             console.log(err)
-        }
-        console.log("users  " + users);
-        req.flash('success', 'User update successfully')
-        res.redirect('/users/list');
-    })
-
-
+            console.log(result)
+            if (err) {
+                console.log(err)
+            }
+            if (result) {
+                req.flash('error', 'this email already exist')
+                res.redirect('/users/' + ID + '/edit');
+                return;
+            }
+            User.updateOne({ _id: ID }, { $set: updatedUser }, (err, users) => {
+                if (err) {
+                    console.log(err)
+                }
+                console.log("users  " + users);
+                req.flash('success', 'User update successfully')
+                res.redirect('/users/list');
+            })
+        })
+    }
 }
 
 deleteUser = function (req, res, next) {
@@ -104,6 +139,7 @@ deleteUser = function (req, res, next) {
             console.log(err)
         }
         console.log(doc)
+        req.flash('success', 'Users Delete successfully')
         res.redirect('/users/list')
     })
 }

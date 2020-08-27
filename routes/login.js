@@ -8,13 +8,13 @@ const csrf = require('csurf');
 
 router.use(csrf())
 
-router.get('/login', isNotSignin, function (req, res, next) {
+router.get('/', isNotSignin, function (req, res, next) {
     var massagesError = req.flash('signinError')
     totalProduct = 0;
-    res.render('login/login', { massages: massagesError, token: req.csrfToken() });
+    res.render('login/login', { title: process.env.TITLE_DASHBOARD,massages: massagesError, token: req.csrfToken() });
 });
 
-router.post('/login', [
+router.post('/', [
     check('email').not().isEmpty().withMessage('Please enter you email'),
     check('email').isEmail().withMessage('Please enter vaild email'),
     check('password').not().isEmpty().withMessage('Please enter you password'),
@@ -30,7 +30,7 @@ router.post('/login', [
         }
 
         req.flash('signinError', validationMassage);
-        res.redirect('/login/login');
+        res.redirect('/login');
         return;
     }
 
@@ -38,13 +38,13 @@ router.post('/login', [
 }, passport.authenticate('local-signin', {
 
     successRedirect: '/',
-    failureRedirect: '/login/login',
+    failureRedirect: '/login',
     failureFlash: true,
 }))
 
 router.get('/logout', isSignin, (req, res, next) => {
     req.logOut();
-    res.redirect('/login/login')
+    res.redirect('/login')
 
 })
 

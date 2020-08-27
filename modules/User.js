@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const schema = mongoose.Schema;
 
 const UserSchema = mongoose.Schema({
     email: {
@@ -26,8 +27,12 @@ const UserSchema = mongoose.Schema({
         default: "/images/default.jpg"
     },
     role: {
-        type: String,
-    }
+        // it refers to the type of the column of object
+        type: schema.Types.Object,
+        // I determine the object that the type refers to
+        ref: 'Role',
+        required: true
+    },
 
 });
 

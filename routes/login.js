@@ -11,7 +11,7 @@ router.use(csrf())
 router.get('/', isNotSignin, function (req, res, next) {
     var massagesError = req.flash('signinError')
     totalProduct = 0;
-    res.render('login/login', { title: process.env.TITLE_DASHBOARD,massages: massagesError, token: req.csrfToken() });
+    res.render('login/login', { title: process.env.TITLE_DASHBOARD,layout: false,massages: massagesError, token: req.csrfToken()});
 });
 
 router.post('/', [

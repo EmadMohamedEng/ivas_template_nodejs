@@ -6,6 +6,7 @@ var logger = require('morgan');
 var dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const expressValidator = require('express-validator');
+const expressHbs = require('express-handlebars') ;
 const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
@@ -30,8 +31,22 @@ mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true, useUnifiedTopo
 require('./config/passport')
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
+app.engine('.hbs', expressHbs({
+  defaultLayout: 'layout', extname: '.hbs', helpers: {
+    add: function (value) {
+      return value + 1;
+    },
+    checkQuantity: function (value) {
+      if (value <= 1) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+}))
+app.set('view engine', '.hbs');
+//app.set('views', path.join(__dirname, 'views'));
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -68,7 +83,7 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error',{layout: false});
 });
 
 module.exports = app;

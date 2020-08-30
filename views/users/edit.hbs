@@ -56,12 +56,11 @@
                             <select class="form-control chosen-rtl" data-placeholder="Choose a Role" name="role"
                                 tabindex="1">
                                 {{#each roles }}
-                                <option value="{{this.role}}" selected="selected">
+                                <option value="{{this.role}}" {{#if  (ifCond this.role ../user.role)}}
+                                    selected="selected" {{/if}}>
                                     {{this.role}}
                                 </option>
                                 {{/each}}
-
-
                             </select>
                         </div>
                     </div>

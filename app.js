@@ -33,19 +33,27 @@ require('./config/passport')
 // view engine setup
 app.engine('.hbs', expressHbs({
   defaultLayout: 'layout', extname: '.hbs', helpers: {
-    add: function (value) {
-      return value + 1;
-    },
-    checkQuantity: function (value) {
-      if (value <= 1) {
+    ifCond: function (v1, v2,options) {
+      if (v1 == v2) {
+        console.log(true);
         return true;
       } else {
+        console.log(false);
+
         return false;
       }
     }
   }
 }))
 app.set('view engine', '.hbs');
+
+// hbs.registerHelper('ifCond', function(v1, v2, options) {
+//   if(v1 === v2) {
+//     return options.fn(this);
+//   }
+//   return options.inverse(this);
+// });
+
 //app.set('views', path.join(__dirname, 'views'));
 
 app.use(logger('dev'));

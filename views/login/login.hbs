@@ -1,136 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- BEGIN Main Content -->
+<div class="login-wrapper">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Ivas Temp</title>
-</head>
-<link rel="stylesheet" type="text/css" href="/assets/chosen-bootstrap/chosen.min.css" />
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" type="text/css" href="/assets/jquery-tags-input/jquery.tagsinput.css" />
-<link rel="stylesheet" type="text/css" href="/assets/jquery-pwstrength/jquery.pwstrength.css" />
-<link rel="stylesheet" type="text/css" href="/assets/bootstrap-fileupload/bootstrap-fileupload.css" />
-<link rel="stylesheet" type="text/css" href="/assets/bootstrap-duallistbox/duallistbox/bootstrap-duallistbox.css" />
-<link rel="stylesheet" type="text/css" href="/assets/dropzone/downloads/css/dropzone.css" />
-<link rel="stylesheet" type="text/css" href="/assets/bootstrap-colorpicker/css/colorpicker.css" />
-<link rel="stylesheet" type="text/css" href="/assets/bootstrap-timepicker/compiled/timepicker.css" />
-<link rel="stylesheet" type="text/css" href="/assets/clockface/css/clockface.css" />
-<link rel="stylesheet" type="text/css" href="/assets/bootstrap-datepicker/css/datepicker.css" />
-<link rel="stylesheet" type="text/css" href="/assets/bootstrap-daterangepicker/daterangepicker.css" />
-<link rel="stylesheet" type="text/css" href="/assets/bootstrap-switch/static/stylesheets/bootstrap-switch.css" />
-<link rel="stylesheet" type="text/css" href="/assets/bootstrap-wysihtml5/bootstrap-wysihtml5.css" />
-
-<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-
-
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" />
-<link rel="stylesheet" type="text/css"
-    href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" />
-<link rel="stylesheet" href="/assets/data-tables/bootstrap3/dataTables.bootstrap.css" />
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
-
-
-<!--base css styles-->
-<link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.min.css">
-<!--page specific css styles-->
-
-<!--flaty css styles-->
-<link rel="stylesheet" href="/css/flaty.css">
-<link rel="stylesheet" href="/css/flaty-responsive.css">
-
-
-
-<link rel="shortcut icon" href="/img/favicon.png">
-<meta name="csrf-token" content="">
-
-<script>
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    function ConfirmDelete() {
-        var x = confirm("Are you sure you want to delete?");
-        if (x)
-            return true;
-        else
-            return false;
-    }
-</script>
-
-
-<body style="background: #e9f0f9;">
-    <div class="container" id="main-container">
-        <div class="row" >
-            <div class="col-md-4 card_spac"></div>
-            <div class="col-md-4 card_spac" style="margin-top: 5%;">
-                <div class="shop-banner" style="margin-bottom: 5%;">
-                    <img src="/images/slides/slider-cat2.jpg" alt="">
-                </div>
-                <h3 style="text-align: center;">SignIn</h3>
-                {{#each massages}}
-                <div class="alert alert-danger" role="alert">
-                    <span class="closebtn"
-                        style="margin-left: 15px;color: black;font-weight: bold;float: right;font-size: 22px;cursor: pointer;transition: 0.3s;line-height: 20px;"
-                        onclick="this.parentElement.style.display='none';">×</span>
-                    {{this}}
-                </div>
-                {{/each}}
-                <form action="/login" method="POST" style="padding: 15%;">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" name="email" class="form-control" id="exampleInputEmail1"
-                            aria-describedby="emailHelp">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" name="password" class="form-control" id="exampleInputPassword1">
-                    </div>
-                    <input type="hidden" name="_csrf" value="{{token}}">
-                    <button type="submit" class="btn btn-primary ">Submit</button>
-                </form>
-            </div>
-            <div class="col-md-4 card_spac"></div>
+    <!-- BEGIN Login Form -->
+    <form method="POST" action="/login" accept-charset="UTF-8">
+        {{#each massages}}
+        <div class="alert alert-danger" role="alert">
+            <span class="closebtn"
+                style="margin-left: 15px;color: black;font-weight: bold;float: right;font-size: 22px;cursor: pointer;transition: 0.3s;line-height: 20px;"
+                onclick="this.parentElement.style.display='none';">×</span>
+            {{this}}
         </div>
-    </div>
-</body>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="/assets/jquery/jquery-2.1.4.min.js"><\/script>')</script>
-<script src="/assets/jquery-cookie/jquery.cookie.js"></script>
-<script src="/assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="/assets/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<script src="/js/flaty.js"></script>
-<!--page specific plugin scripts-->
-<script src="/assets/flot/jquery.flot.js"></script>
-<script src="/assets/flot/jquery.flot.resize.js"></script>
-<script src="/assets/flot/jquery.flot.pie.js"></script>
-<script src="/assets/flot/jquery.flot.stack.js"></script>
-<script src="/assets/flot/jquery.flot.crosshair.js"></script>
-<script src="/assets/sparkline/jquery.sparkline.min.js"></script>
+        {{/each}}
+        <input type="hidden" name="_csrf" value="{{token}}">
+        <h3>Login to your account</h3>
+        <hr />
+        <div class="form-group">
+            <div class="controls">
+                <input class="form-control" placeholder="Email" name="email" type="email"><br>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="controls">
+                <input class="form-control" placeholder="password" name="password" type="password" value=""><br>
+            </div>
+        </div>
 
+        <div class="form-group">
+            <div class="controls">
+                <input class="btn btn-primary form-control" type="submit" value="Login">
+            </div>
+        </div>
+        <hr />
 
-<script type="text/javascript" src="/assets/chosen-bootstrap/chosen.jquery.min.js"></script>
-<script type="text/javascript" src="/assets/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
-<script type="text/javascript" src="/assets/jquery-tags-input/jquery.tagsinput.min.js"></script>
-<script type="text/javascript" src="/assets/jquery-pwstrength/jquery.pwstrength.min.js"></script>
-<script type="text/javascript" src="/assets/bootstrap-fileupload/bootstrap-fileupload.min.js"></script>
-<script type="text/javascript" src="/assets/bootstrap-duallistbox/duallistbox/bootstrap-duallistbox.js"></script>
-<script type="text/javascript" src="/assets/dropzone/downloads/dropzone.min.js"></script>
-<script type="text/javascript" src="/assets/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
-<script type="text/javascript" src="/assets/clockface/js/clockface.js"></script>
-<script type="text/javascript" src="/assets/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
-<script type="text/javascript" src="/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-<script type="text/javascript" src="/assets/bootstrap-daterangepicker/date.js"></script>
-<script type="text/javascript" src="/assets/bootstrap-daterangepicker/daterangepicker.js"></script>
-<script type="text/javascript" src="/assets/bootstrap-switch/static/js/bootstrap-switch.js"></script>
-<script type="text/javascript" src="/assets/bootstrap-wysihtml5/wysihtml5-0.3.0.js"></script>
-<script type="text/javascript" src="/assets/bootstrap-wysihtml5/bootstrap-wysihtml5.js"></script>
-<script type="text/javascript" src="/assets/ckeditor/ckeditor.js"></script>
+    </form>
+    <!-- END Login Form -->
 
-
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/assets_/data-tables/bootstrap3/dataTables.bootstrap.js"></script>
-
-</html>
+</div>
+<!-- END Main Content -->

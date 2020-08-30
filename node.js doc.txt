@@ -271,25 +271,29 @@ https://github.com/expressjs/csurf/issues/36
 
 
 
- {{#each products}}
-    <div class="row">
-        {{#each this}}
-            <div class="col-md-4 card_spac">
-                <div class="card">
-                    <img src="{{this.imagePath}}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h4 class="card-title">{{this.producttName}}</h4>
-                        <p class="card-text">
-                            Storage Capacity : {{this.information.storageCapacity}} GB <br>
-                            Number Of SIM : {{this.information.numberOfSIM}} <br>
-                            Rear Camera Rasolution : {{this.information.cameraRasolution}} Mp <br>
-                            Display Size (Inch) : {{this.information.displaySize}} Inch
-                        </p>
-                        <div class="price float-left">Price: $ {{this.price}}</div>
-                        <a href="#" class="btn btn-success float-right">Buy</a>
-                    </div>
+{{#each massages}}
+                <div class="alert alert-danger" role="alert">
+                    <span class="closebtn"
+                        style="margin-left: 15px;color: black;font-weight: bold;float: right;font-size: 22px;cursor: pointer;transition: 0.3s;line-height: 20px;"
+                        onclick="this.parentElement.style.display='none';">×</span>
+                    {{this}}
+                </div>
+                {{/each}}
+
+
+
+<form action="/login" method="POST" style="padding: 15%;">
+            <div class="form-group">
+                <div class="controls">
+                    <input type="email" name="email" class="form-control" id="exampleInputEmail1"
+                        aria-describedby="emailHelp">
                 </div>
             </div>
-        {{/each}}
-    </div>
-{{/each}} 
+            <div class="form-group">
+                <div class="controls">
+                    <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+                </div>
+            </div>
+            <input type="hidden" name="_csrf" value="{{token}}">
+            <button type="submit" class="btn btn-primary ">Submit</button>
+        </form>

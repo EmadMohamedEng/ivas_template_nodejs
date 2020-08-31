@@ -66,9 +66,22 @@ const rolesValidation = (data) => {
     return Joi.validate(data, schema);
 }
 
+const categoryValidation = (data) => {
+    const schema = {
+        name: Joi.string()
+        .empty(''),
+            image: Joi.string()
+            .empty(''),
+        _csrf: Joi.string()
+            .empty(''),
+    };
+    return Joi.validate(data, schema);
+}
+
 module.exports = {
     profileValidation: profileValidation,
     passwordValidation: passwordValidation,
     addUsersValidation: addUsersValidation,
     rolesValidation: rolesValidation,
+    categoryValidation: categoryValidation,
 }

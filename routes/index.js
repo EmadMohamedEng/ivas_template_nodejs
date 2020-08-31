@@ -17,6 +17,7 @@ const upload = multer({ storage: storage })
 
 router.use(upload.single('myfile'));
 
+
 router.get('/', isSignin, IndexControl.Index)
 
 router.get('/profile', isSignin, IndexControl.profile)

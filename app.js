@@ -11,11 +11,13 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
 var roleRouter = require('./routes/role');
+var categoryRouter = require('./routes/category');
 
 
 var app = express();
@@ -39,20 +41,12 @@ app.engine('.hbs', expressHbs({
         return true;
       } else {
         console.log(false);
-
         return false;
       }
     }
   }
 }))
 app.set('view engine', '.hbs');
-
-// hbs.registerHelper('ifCond', function(v1, v2, options) {
-//   if(v1 === v2) {
-//     return options.fn(this);
-//   }
-//   return options.inverse(this);
-// });
 
 //app.set('views', path.join(__dirname, 'views'));
 
@@ -69,13 +63,15 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(bodyParser.json());       
+app.use(bodyParser.urlencoded({ extended: true})); 
 
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/login', loginRouter);
 app.use('/roles', roleRouter);
+app.use('/category', categoryRouter);
 
 
 // catch 404 and forward to error handler

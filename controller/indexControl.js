@@ -4,7 +4,7 @@ const { profileValidation, passwordValidation } = require("../validation/validat
 
 Index = function (req, res, next) {
     const userLogin = req.user
-    res.render('index', {title: process.env.TITLE_DASHBOARD, checkUser: req.isAuthenticated(), userLogin: userLogin })
+    res.render('index', { title: process.env.TITLE_DASHBOARD, checkUser: req.isAuthenticated(), userLogin: userLogin })
 
 }
 
@@ -54,6 +54,8 @@ editInfoUser = function (req, res, next) {
 }
 
 uploadfile = function (req, res, next) {
+    console.log(req.file.path);
+    return;
     console.log((req.file.path).slice(6));
     const newuser = {
         image: (req.file.path).slice(6)
